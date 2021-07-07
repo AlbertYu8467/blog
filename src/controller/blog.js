@@ -1,8 +1,13 @@
+const { exec } = require('../db/mysql')
 const getList = (author,keyword) => {
-  return [
-    {id:1,title:'标题A',content:'内容A',createTime:1625497063905,author:'zhangsan'},
-    {id:2,title:'标题B',content:'内容B',createTime:1625497099106,author:'lisi'},
-  ]
+  let sql = `select * from blog where 1=1 `
+  if(author){
+    sql += `and author='${author}'`
+  }
+  if(keyword){
+    sql += `and author='${keyword}'`
+  }
+  return exec(sql); 
 }
 const getDetail = (id) => {
   return [
@@ -17,10 +22,14 @@ const newBlog = (blogData={}) => {
 const updateBlog = (id, blogData={}) => {
   return false
 }
+const delBlog = (id) => {
+  return true
+}
 
 module.exports = {
   getList,
   getDetail,
   newBlog,
-  updateBlog 
+  updateBlog,
+  delBlog
 }
