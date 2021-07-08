@@ -12,3 +12,7 @@ xx.html?a=1&
 - 修改controller
 - 修改router
 - 修改app.js handle
+## debug 
+`` 调试需要配置
+## 登录验证
+用户校验
