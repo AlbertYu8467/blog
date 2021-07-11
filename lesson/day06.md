@@ -17,3 +17,25 @@
   cookie放userId, server对应username
   - 解决的问题  客户端存储太危险
   - 实现session
+  - session 内存有限
+  - 进程数据无法共享 
+  ## redis 缓存数据库，数据放内存中
+  - 访问数据快
+  - 内存小
+  - 断电丢失
+  - 操作频率高
+  1. 安装redis. brew install redis
+  2. redis-server
+  3. redis-cli
+  4. set myname yuhu 
+  5. get myname
+  6. keys *
+  7. del myname
+  ## redis fuction
+  1. set 
+  2. get
+  ## 前端联调
+  - cookie跨域不共享
+  1. npm i http-server
+  2. http-server -p 8001
+
