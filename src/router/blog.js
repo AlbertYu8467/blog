@@ -16,6 +16,13 @@ const handleBlogRouter = (req,res) => {
   if(method === 'GET' && path === '/api/blog/list'){
     let keyword = req.query.keyword || ''
     let author = req.query.author || ''
+    if(req.query.isadmin){
+      const loginCheckResult = loginCheck(req);
+      if(loginCheckResult){
+        return loginCheckResult;
+      }
+      author = req.session.username;
+    }
     const result = getList(author,keyword);
     return result.then(listData => {
       return new SuccessModel(listData)
@@ -35,7 +42,7 @@ const handleBlogRouter = (req,res) => {
   if(method === 'POST' && path === '/api/blog/new'){
     const loginCheckResult = loginCheck(req);
     if(loginCheckResult){
-      return loginCheck;
+      return loginCheckResult;
     }
     req.body.author = req.session.username;
     const result = newBlog(req.body);
@@ -46,8 +53,9 @@ const handleBlogRouter = (req,res) => {
 
   // 更新一篇博客 
   if(method === 'POST' && path === '/api/blog/update'){
+    const loginCheckResult = loginCheck(req);
     if(loginCheckResult){
-      return loginCheck;
+      return loginCheckResult;
     }
     const result = updateBlog(id,req.body)
     return result.then(value => {
@@ -59,9 +67,10 @@ const handleBlogRouter = (req,res) => {
     })
   }
   // 删除一篇博客
-  if(method === 'POST' && path === '/api/blog/del'){
+  if(method === 'GET' && path === '/api/blog/del'){
+    const loginCheckResult = loginCheck(req);
     if(loginCheckResult){
-      return loginCheck;
+      return loginCheckResult;
     } 
     const author = req.session.username;
     const result = delBlog(id,author)

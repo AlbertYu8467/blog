@@ -16,7 +16,8 @@ const getPostData = req => {
       resolve({})
       return
     }
-    if(req.headers['content-type'] !== 'application/json'){
+    console.log(req.headers)
+    if(!req.headers['content-type'].includes('application/json')){
       resolve({})
       return
     }
@@ -95,7 +96,7 @@ const serverHandle = (req,res) => {
     const blogResult = handleBlogRouter(req,res);
     if(blogResult){ 
       if(needSetCookie){
-         res.setHeader('Set-Cookie', `userid=${userid}; path=/; httpOnly; expires=${getCookieExpires()}`)
+         res.setHeader('Set-Cookie', `userid=${userId}; path=/; httpOnly; expires=${getCookieExpires()}`)
       }
       blogResult.then(blogData => {
           res.end(JSON.stringify(blogData))

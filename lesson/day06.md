@@ -38,4 +38,16 @@
   - cookie跨域不共享
   1. npm i http-server
   2. http-server -p 8001
+  ## nginx 代理
+  - 静态服务、负载均衡
+  - 反向代理
+  nginx -t 检查是否正确
+  nginx 启动
+  nginx -s reload 重启
+  nginx -s stop 停止
+  work_process:2 //cpu数量
+  location / {
+    proxy_pass http://localhost:8001;
+  }
+  nginx配置问题.
 
