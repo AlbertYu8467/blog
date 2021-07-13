@@ -21,5 +21,6 @@ const { MYSQL_CONF } = require('../config/db')
   return promise;
  }
  module.exports = {
-   exec
+   exec,
+   escape:mysql.escape 
  }

@@ -17,7 +17,6 @@ const getPostData = req => {
       resolve({})
       return
     }
-    console.log(req.headers)
     if(!req.headers['content-type'].includes('application/json')){
       resolve({})
       return
