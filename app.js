@@ -1,6 +1,7 @@
 const qs = require('querystring')
 const handleBlogRouter = require('./src/router/blog')
 const handleUserRouter = require('./src/router/user')
+const {access} = require('./src/utils/log')
 const {get, set}  = require('./src/db/redis')
 // const SESSION_DATA = {}
 const getCookieExpires = () => {
@@ -36,6 +37,9 @@ const getPostData = req => {
   return promise
 }
 const serverHandle = (req,res) => {
+  //记录access日志
+  access(`${req.method} -- ${req.url} --  ${req.headers['user-agent']} -- ${Date.now()}`)
+
   res.setHeader('Content-type','application/json')
   let url = req.url;
   req.path = url.split('?')[0]
